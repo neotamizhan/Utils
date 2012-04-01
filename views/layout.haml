@@ -1,0 +1,28 @@
+!!!5
+%html{"xml:lang" => "en", :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html;charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title
+  %body
+    .form
+      %form{:action => "#"}
+        %label{:for => "phrase"} The Phrase to be converted :
+        %input#phrase{:type => "text"}/
+        %br/
+        %a#uni2hex.lnks{:href => "#"} Get Hex
+        %a#hex2uni.lnks{:href => "#"} Get Uni
+    #result
+    %form
+    %script{:src => "jquery.min.js", :type => "text/javascript"}
+    :javascript
+      $('.lnks').click( function(){
+        var url = '/' + $(this).attr('id');
+        var uni = $('input#phrase').val();      
+        console.log(url + "::::" + uni);
+        var hex = $.post(url, {phrase: uni},
+            function(data){
+              console.log(data);
+              $('#result').text(data);
+            }
+          );
+      });
