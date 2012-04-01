@@ -3,21 +3,26 @@
   %head
     %meta{:content => "text/html;charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title
-  %body
+    %link{:href=>"assets/css/bootstrap.css", :rel=>"stylesheet"}
+
+  %body{:style=>"margin: 40px;"}
+    .hero-unit
+      %h2{:align=>"center"} Common Utilities
     .form
       %form{:action => "#"}
-        %label{:for => "phrase"} The Phrase to be converted :
-        %input#phrase{:type => "text"}/
+        %p The Phrase to be converted :
         %br/
-        %a#uni2hex.lnks{:href => "#"} Get Hex
-        %a#hex2uni.lnks{:href => "#"} Get Uni
+        %textarea#phrase{:cols => "30", :rows => "5"}
+        %br/
+        %a#uni2hex{:class=>"lnks btn btn-primary btn-large", :href => "#"} Get Hex
+        %a#hex2uni{:class=>"lnks btn btn-primary btn-large", :href => "#"} Get Uni
     #result
     %form
-    %script{:src => "jquery.min.js", :type => "text/javascript"}
+    %script{:src => "assets/js/jquery.min.js", :type => "text/javascript"}
     :javascript
       $('.lnks').click( function(){
         var url = '/' + $(this).attr('id');
-        var uni = $('input#phrase').val();      
+        var uni = $('#phrase').val();      
         console.log(url + "::::" + uni);
         var hex = $.post(url, {phrase: uni},
             function(data){
